@@ -1,8 +1,11 @@
+package com.example.simplebus
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simplebus.R
 import com.example.simplebus.aPI.BusData
 import com.example.simplebus.aPI.BusDataAdapter
 import com.example.simplebus.aPI.RetrofitClient
@@ -22,13 +25,20 @@ class MainActivity : AppCompatActivity() {
         busSearch = findViewById(R.id.busSearch)
         showBusData = findViewById(R.id.showBusData)
 
-        busSearch.setOnClickListener {
-            fetchBusData()
+        // Set up the click listener for busSearch
+        busSearch.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                (event != null && event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)
+            ) {
+                fetchBusData()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
     }
 
     private fun fetchBusData() {
-        val apiKey = "your_api_key"  // Replace with your actual API key
+        val apiKey = "d3a4535d7faf5fbf95bd5fe87e670ab90028e332"  // Replace with your actual API key
         val datasetId = "someDatasetId"
 
         RetrofitClient.instance.getTimetables(apiKey, "your_admin_area")

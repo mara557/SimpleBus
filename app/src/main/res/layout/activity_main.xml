@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/busSearch"
-        android:layout_width="308dp"
-        android:layout_height="86dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:background="@null"
         android:gravity="center"
@@ -37,7 +37,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/showBusData"
-        android:layout_width="397dp"
+        android:layout_width="0dp"
         android:layout_height="306dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
